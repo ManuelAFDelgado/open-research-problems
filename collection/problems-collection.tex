@@ -1,0 +1,292 @@
+\documentclass[12pt]{amsart}
+\usepackage{fullpage} 
+\usepackage[normalem]{ulem}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+%\usepackage{emerald}
+%\usepackage[cal=bickhams]{mathalpha}
+%\usepackage{stmaryrd}
+
+\setlength{\parskip}{.2em}
+% \input{preamble.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%% ``commonly used packages`` %%%%%%%%%%%%%%%%%%
+\usepackage{amsfonts,amsmath,amsthm,amssymb}
+%\usepackage{enumerate}
+\usepackage{enumitem} 
+%\usepackage{fullpage}
+%\usepackage{appendix}
+\usepackage{siunitx} % spacing in (big) numbers
+%%%%%%%%%%%%%%%%%%% end of ``commonly used packages`` %%%%%%%%%%%%%%%%%%
+
+\usepackage[hidelinks,linktoc=all]{hyperref}
+
+%%%%%%%%%%%%%% \numberwithin requires the amsmath package
+\numberwithin{table}{section}
+\numberwithin{figure}{section}
+\numberwithin{equation}{section}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "for references" %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% to use bibtex, comment the following lines and adapt the end of the document
+%%%%%%%%%
+\usepackage[backend=biber,style=numeric,hyperref=true,isbn=false,doi=false]{biblatex}
+\addbibresource{refs.bib}
+%%%%%%%%%%%%%%%%%%%%%%%%%% end of "for references" %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "for drawings" %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{pgf} 
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{adjustbox}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% end of"for drawings" %%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ``operators`` %%%%%%%%%%%%%%%%%%%
+\DeclareMathOperator{\wilfoper}{W} %Wilf number
+\DeclareMathOperator{\eliahouoper}{E} %Eliahou number
+\DeclareMathOperator{\Frobeniusoper}{F} %Frobenius number
+\DeclareMathOperator{\conductoroper}{c} %conductor
+\DeclareMathOperator{\multiplicityoper}{m} %multiplicity
+\DeclareMathOperator{\leftsoper}{L} %lefts
+\DeclareMathOperator{\extleftsoper}{L^{\prime}} %extended lefts
+\DeclareMathOperator{\primitivesoper}{P} %primitives
+\DeclareMathOperator{\genusoper}{g} %genus
+\DeclareMathOperator{\gapsoper}{G} %gaps
+%\DeclareMathOperator{\maxprimoper}{a} %gaps
+
+\DeclareMathOperator{\divisors}{\mathrm{Div}}
+\DeclareMathOperator{\depth}{\mathrm{q}}
+\DeclareMathOperator{\pdepth}{\mathrm{\pi}} %primitive depth
+
+\DeclareMathOperator{\divides}{ | } %
+\DeclareMathOperator{\dividess}{ |* } %
+\DeclareMathOperator{\suchthat}{ : } %
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% end of "operators" %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\titlefrobsetf}{\(\mathcal{N}_f\)}
+\newcommand{\titlemaxprimcardn}{\(A_n\)}
+\newcommand{\mainmap}{\(\Phi\)}
+
+%%%%%%%%%%
+
+\newcommand{\maxprimset}[1]{\mathcal{A}_{#1}}
+\newcommand{\maxprimcard}[1]{{A}_{#1}}
+
+\newcommand{\frobset}[1]{\mathcal{N}_{#1}}
+\newcommand{\frobcard}[1]{{N}_{#1}}
+
+\newcommand{\dfrobset}[1]{\mathcal{D}_{#1}}
+\newcommand{\dfrobcard}[1]{{D}_{#1}}
+
+%\newcommand{\divisors}{\mathrm{Div}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% ``theorems`` %%%%%%%%%%%%%%%%%%%%%%%%%
+\newtheorem{theorem}{Theorem}[section] %(uncomment to number per section)
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem*{proposition*}{Proposition}
+%\newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{fact}[theorem]{Fact}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{example}[theorem]{Example}
+
+\theoremstyle{remark} 
+%\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{problem}[theorem]{Problem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% end of ``theorems`` %%%%%%%%%%%%%%%%%%%
+
+\usepackage{colortbl}
+
+
+\title{Problems on numerical semigroups}
+\author{Manuel Delgado}
+\date{\today}
+
+\address{CMUP--Centro de Matemática da Universidade do Porto, Departamento de Matemática, Faculdade de Ciências, Universidade do Porto, Rua do Campo Alegre s/n, 4169– 007 Porto, Portugal} 
+\email{mdelgado@fc.up.pt} 
+\thanks{The authors were partially supported by CMUP, a member of LASI, which is financed by national funds through FCT – Fundação
+  para a Ciência e a Tecnologia, I.P., under the projects with reference UID/00144/2025.\\
+  } 
+\begin{document}
+\keywords{Numerical semigroup, Frobenius number, Maximum primitive, Counting numerical semigroups, Wilf's conjecture}
+
+\subjclass[2020]{20M14, 05A16}
+
+% 20M14 Commutative semigroups
+% 20--02 Group theory and generalizations -- survey articles
+% 05--02 Combinatorics -- survey articles
+% 11--02 Number theory -- survey articles
+% 20--04 Explicit machine computation and programs (not the theory of computation or programming) 
+% 05Axx Enumerative combinatorics [For enumeration in graph theory, see 05C30] 
+% 05A15 Exact enumeration problems, generating functions [See also 33Cxx, 33Dxx]
+% 05A16 Asymptotic enumeration
+
+\begin{abstract}
+  
+This note contains problems on numerical semigroups that are pottentialy adequate for undergraduate or young graduate students
+  
+\end{abstract}
+
+\maketitle
+
+%%%%%%%%%%% introduction %%%%%%%%%%
+\section{Introduction}\label{sec:introduction}
+
+Um semigrupo numérico \(S\) é um subconjunto de \(\mathbb{N}\) (o conjunto dos inteiros não negativos) tal que \(0 \in S\), \(S\) é estável para a adição e o seu complemento em \(\mathbb{N}\) é finito.
+
+Uma boa introdução aos semigrupos numéricos é um livro de Rosales e García-Sánchez~\cite{RosalesGarcia2009Book-Numerical}. Lá encontramos a generalidade da notação e terminologia usada neste plano.
+
+Ao longo deste plano de trabalhos, \(S\) representa um semigrupo numérico arbitrário. 
+
+Um semigrupo numérico \(S\) tem um único conjunto de geradores que é minimal para a inclusão. Esse conjunto é finito e designamos os seus elementos por \emph{elementos primitivos}. Denotamos o conjunto dos elementos primitivos de~\(S\) por~\(\primitivesoper\). A sua cardinalidade, dita \emph{dimensão de imersão} de~\(S\) denota-se por~\(\lvert \primitivesoper\rvert\).
+
+A \emph{multiplicidade} de~\(S\) é o mais pequeno inteiro positivo de~\(S\) e denota-se por~\(\multiplicityoper\).
+O \emph{número de Frobenius} de~\(S\) é o maior inteiro que não pertence a~\(S\) e denota-se por~\(\Frobeniusoper\).
+O \emph{condutor} de~\(S\) é \(\conductoroper=\Frobeniusoper +1\).
+%
+O conjunto dos \emph{elementos esquerdos} de~\(S\) consiste dos elementos de~\(S\) mais pequenos que~\(\Frobeniusoper\). Denota-se por \(\leftsoper\).
+
+
+%%%%%%%%%%%% the numerical semigroups graph %%%%%%%%%%
+\section{The graph of numerical semigroups and generating trees}\label{sec:NSgraph}
+
+
+
+%%%%%%%%%%%%% Wilf's conjecture %%%%%%%%%%%
+\section{Conjetura de Wilf}\label{sec:Wilf}
+  	A um semigrupo numérico~\(S\) associamos o número seguinte a que chamamos \emph{número de Wilf} de~\(S\):
+\begin{equation*}\label{eq:wilf-number}
+\wilfoper = \lvert \primitivesoper \rvert\lvert \leftsoper \rvert-\conductoroper.
+\end{equation*}
+
+
+Um dos problemas que mais interesse tem despertado nos investigadores da área de semigrupos numéricos é devido a Wilf~\cite[Problem~(a)]{Wilf1978AMM-circle}, é hoje em dia conhecido por \emph{conjetura de Wilf} e pode ser enunciado como segue:
+\smallskip
+
+\textbf{Conjetura} (Wilf, 1978) Todo o semigrupo numérico tem número de Wilf não negativo.
+%\begin{conjecture}[Wilf, 1978]\label{conj:wilf}
+%	Todo o semigrupo numérico tem número de Wilf não negativo.
+%\end{conjecture}
+\smallskip
+
+São conhecidas diversas famílias grandes de semigrupos numéricos que satisfazem a conjetura de Wilf. Em~\cite{Delgado2020-survey} encontra-se uma síntese e~\cite{DelgadoKumarMarion2025pp-counting} contém resultados recentes.
+As técnicas usadas são diversas, sendo de referir que resultados e técnicas de Combinatória Aditiva (algumas apresentadas em~\cite{TaoVu2006Book-Additive}) parece poderem ser mais exploradas.
+
+O número de inteiros positivos que não pertencem a um semigrupo numérico diz-se o seu \emph{género}. 
+Recentemente (ver~\cite{DelgadoEliahouFromentin2025JoA-verification}) foi provado que a família de mais de \(42\times 10^{20}\) (valor estimado) semigrupos numéricos de género até \(100\) consiste de semigrupos que satisfazem a conjetura de Wilf. Este resultado é consequência de vários resultados teóricos aliados a uma forma eficaz de evitar uma verificação exaustiva bem como o uso intensivo de meios computacionais. 
+
+Como qualquer problema que atrai o interesse de um grande número de investigadores, a conjetura de Wilf gera problemas com interesse por si mesmos. A título de exemplo, Eliahou~\cite{Eliahou2018JEMS-Wilfs} põe o problema de caraterizar a família de semigrupos numéricos que satisfaz 
+\begin{equation*}
+\lvert \primitivesoper\cap \leftsoper\rvert\lvert \leftsoper \rvert - \lceil{\conductoroper/\multiplicityoper}\rceil \lvert D\rvert + \lceil{\conductoroper/\multiplicityoper}\rceil\multiplicityoper - \conductoroper \ge 0.
+\end{equation*}
+Deve registar-se que esta família de semigrupos satisfaz a conjetura de Wilf, facto que Eliahou~\cite{Eliahou2018JEMS-Wilfs} usou para mostrar que a família de semigrupos numéricos satisfazendo \(\conductoroper\ge 3\multiplicityoper\) satisfaz a conjetura de Wilf (o que, aliado a outros resultados, constitui uma prova de que assintoticamente, num certo sentido, todos os semigrupos numéricos satisfazem a conjetura de Wilf).
+O problema proposto por Eliahou antes referido deu já origem a diversos trabalhos de investigação (por exemplo, \cite{Delgado2018MZ-question,EliahouFromentin2019SF-misses}) e está provavelmente longe de estar resolvido.
+%\smallskip
+
+O que aconteceria a este plano de trabalhos se fosse encontrado um semigrupo numérico com número de Wilf negativo? Novos problemas surgiriam, a exemplo do problema proposto por Eliahou referido antes: caraterizar os semigrupos numéricos com número de Wilf negativo. Ou mesmo algo menos ambicioso (em analogia com os trabalhos~\cite{Delgado2018MZ-question,EliahouFromentin2019SF-misses}): encontrar famílias infinitas de semigrupos numéricos com número de Wilf negativo. 
+\smallskip
+
+Referimos ainda a existência de software que ajudará na escolha das pistas a seguir na investigação, descartando outras. O pacote \texttt{numerigalsgps}~\cite{NumericalSgps1.4.0}, escrito na linguagem GAP~\cite{GAP4.14.0} e distribuído com o sistema computacional com o mesmo nome, destina-se a cálculos com semigrupos numéricos. Algoritmos desenvolvidos no decurso da investigação poderão ser implementados em GAP e adicionados ao pacote referido, o qual aceita contribuições.
+
+
+%
+%Let \(\depthoper(S)=\lceil \conductoroper(S)/\multiplicityoper(S)\rceil\) be the smallest integer greater than or equal to  \(\conductoroper(S)/\multiplicityoper(S)\). This number is called the \emph{depth} of~\(S\) and is frequently denoted just by~\( \depthoper\). 
+%
+%The set of \emph{left elements} of~ \(S\) consists of the elements of~ \(S\) that are smaller than  \(\conductoroper(S)\). It is denoted \(\leftsoper(S)\), or simply~\(\leftsoper\).
+%A positive integer that does not belong to  \(S\) is said to be a \emph{gap} of  \(S\) (\emph{omitting value} in Wilf's terminology). The cardinality of the set of gaps is said to be the \emph{genus} of  \(S\) and, following Wilf, is denoted by \(\genusoper(S)\), or simply by \(\genusoper\). 
+%
+%The number of primitives of  \(S\) is  called the \emph{embedding dimension} of~\(S\). As it is just the cardinality of \(\primitivesoper(S)\), it can be denoted \(\lvert \primitivesoper(S)\rvert\), or~\(\lvert \primitivesoper\rvert\).
+%%but in this paper I will mainly use the notation  \(\embeddingdimensionoper(S)\), or simply~\(\embeddingdimensionoper\); \(\embeddingdimensionoper\) stands for \emph{dimension} (a short for embedding dimension). 
+%
+%\bigskip
+%  	To a numerical semigroup~\(S\) one can associate the following number, denoted \(\wilfoper(S)\) and called the \emph{Wilf number} of~\(S\):
+%\begin{equation*}\label{eq:wilf-number}
+%\wilfoper(S) = \lvert \primitivesoper(S) \rvert\lvert \leftsoper(S) \rvert-\conductoroper(S).
+%\end{equation*}
+%To \(S\) one can also associate the number \(\eliahouoper(S)\) defined below. Here we denote by \(D\) the set of decomposables of \(S\) in the threshold interval, that is, \(D=  \{\conductoroper,\dots,\conductoroper+\multiplicityoper-1\}\setminus \primitivesoper\).
+%% is the set of non primitives of \(S\) in the integer interval of length \(\multiplicityoper\) starting at the conductor.
+%We define:
+%\begin{equation*}\label{eq:eliahou-number}
+%\eliahouoper(S) = \lvert \primitivesoper\cap \leftsoper\rvert\lvert \leftsoper \rvert - {\depthoper} \lvert D\rvert + \depthoper\multiplicityoper - \conductoroper.
+%\end{equation*}
+%
+%The number \(\eliahouoper(S)\) was introduced by Eliahou~\cite{Eliahou2018JEMS-Wilfs} (under the notation~\(\wilfoper_0(S)\)), as a mean to prove Theorem~\ref{th:large-mult-are-wilf}.
+%
+%We say that a numerical semigroup is a \emph{Wilf semigroup} if its Wilf number is non negative.
+%Analogously, we say that a numerical semigroup is an \emph{Eliahou semigroup} if its Eliahou number is non negative.
+%
+%Eliahou~\cite{Eliahou2018JEMS-Wilfs} proved that all numerical semigroups such that \(\conductoroper(S)\le 3\multiplicityoper(S)\) are Eliahou semigroups. He observed that there are numerical semigroups with negative Eliahou number and stated the following problem.
+%\begin{problem}\label{prob:characterize-eliahou}
+%	Give a characterization of the class of numerical semigroups whose Eliahou number is negative.
+%\end{problem}
+%
+%Infinitely many non-Eliahou semigroups are known (see~\cite{Delgado2018MZ-question,Delgado2018MZ-question} and \cite{EliahouFromentin2019SF-misses}), but a full characterization is most probably a difficult problem, which is still open.
+%\smallskip
+%
+% \emph{Wilf's conjecture} can be stated as follows (it is a simple exercise to verify that Wilf's conjecture is valid if and only if the first part of \cite[Problem~(a)]{Wilf1978AMM-circle} has a positive answer):
+%\begin{conjecture}[Wilf, 1978]\label{conj:wilf}
+%	Every numerical semigroup is a Wilf semigroup.
+%\end{conjecture}
+%
+%
+%Kaplan~\cite{Kaplan2012JPAA-Counting} proved that all numerical semigroups with \(\conductoroper(S)\le 2\multiplicityoper(S)\) are Wilf. Eliahou extended that result (by proving that Eliahou semigroups are necessarily Wilf semigroups and using the result mentioned above):
+%
+%\begin{theorem}[{\cite[Cor.~6.5]{Eliahou2018JEMS-Wilfs}}]\label{th:large-mult-are-wilf}
+%	If \(S\) is a numerical semigroup such that \(\conductoroper(S)\le 3\multiplicityoper(S)\), then \(S\) is a Wilf semigroup.
+%\end{theorem}
+%
+%	We recall an asymptotic result due to Zhai~\cite{Zhai2012SF-Fibonacci}. The following notation is used: given a positive integer \(g\), \(t(g)\) denotes the number of semigroups \(S\) such that \(\genusoper(S)=g\) and \(\conductoroper(S)\le 3\multiplicityoper(S)\); \(N(g)\) denotes the total number of semigroups of genus \(g\). Zhai's result says:
+%\[\lim_{g\to\infty}\frac{t(g)}{N(g)}=1.\]
+%In this sense, asymptotically, all numerical semigroups satisfy \(\conductoroper\le 3\multiplicityoper\).
+%By the above, Theorem~\ref{th:large-mult-are-wilf}, gives, in particular, an asymptotic proof of Wilf's conjecture. 
+%\medskip
+%
+%Another deep result of Eliahou is stated next. 
+%%It involves the embedding dimension, another of the invariants present in most of the literature on numerical semigroups. 
+%In his proof, Eliahou uses the elements of a numerical  semigroup to associate a graph to it. Then, graph theory intervenes in a non trivial way, namely by using the notion of vertex-maximal matching. The result obtained improves one of Sammartano~\cite{Sammartano2012SF-Numerical} which states that a numerical semigroup such that \(\left| \primitivesoper \right| \ge m / 2\) is Wilf. 
+%\begin{theorem}[\cite{Eliahou2019ae-graph}]\label{th:large-ed-are-wilf}
+% 	Let \(S\) be a numerical semigroup such that \(\lvert \primitivesoper(S)\rvert \ge \multiplicityoper(S) / 3\). Then \(S\) is Wilf.
+%\end{theorem}
+% 
+%The families of numerical semigroups guaranteed to be Wilf by Theorem~\ref{th:large-mult-are-wilf} and by Theorem~\ref{th:large-ed-are-wilf} are considerably different, by examples provided in~\cite{Delgado2020-survey}. Also, the proofs obtained by Eliahou of Theorems~\ref{th:large-mult-are-wilf} and~\ref{th:large-ed-are-wilf} involve rather different arguments.
+%\medskip
+%
+%	A natural question is whether there is an asymptotic result similar to the one of Zhai referred above, but this time for the semigroups considered in Theorem~\ref{th:large-ed-are-wilf}:
+%
+%	\begin{problem}\label{prob:generic_embedding_dimension}
+%		Denote by \(E(g)\) the number of numerical semigroups of genus \(g\) satisfying \(\lvert \primitivesoper\rvert \ge \multiplicityoper/3\). Is it true that \(\lim_{g\to\infty} \frac{E(g)}{N(g)}=1\)?
+%	\end{problem}
+%	Experiments (see~\cite{Delgado2019ae-Trimming}) suggest that the answer to Problem~\ref{prob:generic_embedding_dimension} is positive. Such a positive answer would lead to a very interesting consequence: one would conclude that Theorem~\ref{th:large-ed-are-wilf} provides another proof of the asymptotic validity of Wilf's conjecture. 
+%	\bigskip
+%	
+%	Problems~\ref{prob:characterize-eliahou} and~\ref{prob:generic_embedding_dimension} are examples of problems to be addressed.  Also, generalizing Theorems~\ref{th:large-mult-are-wilf} and~\ref{th:large-ed-are-wilf} or obtaining other particular cases of Conjecture~\ref{conj:wilf} are to be kept in mind. If, although unlikely, a non-Wilf semigroup is discovered, a new problem arises (in analogy with Problem~\ref{prob:characterize-eliahou}): characterize non-Wilf semigroups. This problem would then be addressed.   
+%	As is often the case when conducting research, previously unforeseen but related problems, often guided by possible applications or by connections within mathematics, may be thought worth considering. If this happens to be the case for some interesting problem, there will be no hesitation in adapting the plan.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% references %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% uncomment to use biblatex  
+\printbibliography
+%%
+%%uncomment to use bibtex
+% \bibliographystyle{plainurl}
+% %\bibliography{../../../../../bib/NumericalS-bib/numericals.bib,../../../../../bib/NumericalS-bib/preprints.bib,../../../../../bib/NumericalS-bib/software.bib,../../../../../bib/NumericalS-bib/slides.bib}
+%%%%%%%%%
+%\input{references}
+\bigskip
+
+Porto, 2 de Setembro de 2025
+\bigskip
+
+\hfill
+José Castro
+\hfill\( \)\hfill
+Manuel Delgado
+\hfill \( \)
+\vfill
+
+\end{document}
+
