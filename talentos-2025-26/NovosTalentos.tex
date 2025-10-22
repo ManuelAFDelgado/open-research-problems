@@ -1,0 +1,184 @@
+%\documentclass[12pt]{amsart}
+\documentclass[12pt,a4paper]{article}
+\usepackage{fullpage} 
+\usepackage[normalem]{ulem}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[portuguese]{babel}
+%\usepackage{emerald}
+%\usepackage[cal=bickhams]{mathalpha}
+%\usepackage{stmaryrd}
+
+\setlength{\parskip}{.2em}
+% \input{preamble.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%% ``commonly used packages`` %%%%%%%%%%%%%%%%%%
+\usepackage{amsfonts,amsmath,amsthm,amssymb}
+%\usepackage{enumerate}
+\usepackage{enumitem} 
+%\usepackage{fullpage}
+%\usepackage{appendix}
+\usepackage{siunitx} % spacing in (big) numbers
+%%%%%%%%%%%%%%%%%%% end of ``commonly used packages`` %%%%%%%%%%%%%%%%%%
+
+\usepackage[hidelinks,linktoc=all]{hyperref}
+
+%%%%%%%%%%%%%% \numberwithin requires the amsmath package
+\numberwithin{table}{section}
+\numberwithin{figure}{section}
+\numberwithin{equation}{section}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "for references" %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% to use bibtex, comment the following lines and adapt the end of the document
+%%%%%%%%%
+\usepackage[backend=biber,style=numeric,hyperref=true,isbn=false,doi=false]{biblatex}
+\addbibresource{refs.bib}
+%%%%%%%%%%%%%%%%%%%%%%%%%% end of "for references" %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "for drawings" %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{pgf} 
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{adjustbox}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% end of"for drawings" %%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ``operators`` %%%%%%%%%%%%%%%%%%%
+\DeclareMathOperator{\wilfoper}{W} %Wilf number
+\DeclareMathOperator{\eliahouoper}{E} %Eliahou number
+\DeclareMathOperator{\Frobeniusoper}{F} %Frobenius number
+\DeclareMathOperator{\conductoroper}{c} %conductor
+\DeclareMathOperator{\multiplicityoper}{m} %multiplicity
+\DeclareMathOperator{\leftsoper}{L} %lefts
+\DeclareMathOperator{\extleftsoper}{L^{\prime}} %extended lefts
+\DeclareMathOperator{\primitivesoper}{P} %primitives
+\DeclareMathOperator{\genusoper}{g} %genus
+\DeclareMathOperator{\gapsoper}{G} %gaps
+%\DeclareMathOperator{\maxprimoper}{a} %gaps
+
+\DeclareMathOperator{\divisors}{\mathrm{Div}}
+\DeclareMathOperator{\depth}{\mathrm{q}}
+\DeclareMathOperator{\pdepth}{\mathrm{\pi}} %primitive depth
+
+\DeclareMathOperator{\divides}{ | } %
+\DeclareMathOperator{\dividess}{ |* } %
+\DeclareMathOperator{\suchthat}{ : } %
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% end of "operators" %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\titlefrobsetf}{\(\mathcal{N}_f\)}
+\newcommand{\titlemaxprimcardn}{\(A_n\)}
+\newcommand{\mainmap}{\(\Phi\)}
+
+%%%%%%%%%%
+
+\newcommand{\maxprimset}[1]{\mathcal{A}_{#1}}
+\newcommand{\maxprimcard}[1]{{A}_{#1}}
+
+\newcommand{\frobset}[1]{\mathcal{N}_{#1}}
+\newcommand{\frobcard}[1]{{N}_{#1}}
+
+\newcommand{\dfrobset}[1]{\mathcal{D}_{#1}}
+\newcommand{\dfrobcard}[1]{{D}_{#1}}
+
+%\newcommand{\divisors}{\mathrm{Div}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% ``theorems`` %%%%%%%%%%%%%%%%%%%%%%%%%
+\newtheorem{theorem}{Theorem}[section] %(uncomment to number per section)
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem*{proposition*}{Proposition}
+%\newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{fact}[theorem]{Fact}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{example}[theorem]{Example}
+
+\theoremstyle{remark} 
+%\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{problem}[theorem]{Problem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% end of ``theorems`` %%%%%%%%%%%%%%%%%%%
+
+\usepackage{colortbl}
+
+
+\title{Contagem de semigrupos numéricos}
+\author{Tema proposto por Manuel Delgado}
+\date{2025/2026}
+
+\begin{document}
+
+\maketitle
+
+
+\begin{abstract}
+  
+This note contains problems on numerical semigroups that are pottentialy adequate for undergraduate or young graduate students
+  
+\end{abstract}
+
+
+
+%%%%%%%%%%% introduction %%%%%%%%%%
+\section{Introdução}\label{sec:introducao}
+
+Um semigrupo numérico \(S\) é um subconjunto de \(\mathbb{N}\) (o conjunto dos inteiros não negativos) tal que \(0 \in S\), \(S\) é estável para a adição e o seu complemento em \(\mathbb{N}\) é finito.
+
+Uma boa introdução aos semigrupos numéricos é um livro de Rosales e García-Sánchez~\cite{RosalesGarcia2009Book-Numerical}. Lá encontramos a generalidade da notação e terminologia usada neste plano.
+
+Ao longo deste plano de trabalhos, \(S\) representa um semigrupo numérico arbitrário. 
+
+Um semigrupo numérico \(S\) tem um único conjunto de geradores que é minimal para a inclusão. Esse conjunto é finito e designamos os seus elementos por \emph{elementos primitivos}. Denotamos o conjunto dos elementos primitivos de~\(S\) por~\(\primitivesoper\). A sua cardinalidade, dita \emph{dimensão de imersão} de~\(S\) denota-se por~\(\lvert \primitivesoper\rvert\).
+
+A \emph{multiplicidade} de~\(S\) é o mais pequeno inteiro positivo de~\(S\) e denota-se por~\(\multiplicityoper\).
+O \emph{número de Frobenius} de~\(S\) é o maior inteiro que não pertence a~\(S\) e denota-se por~\(\Frobeniusoper\).
+O \emph{condutor} de~\(S\) é \(\conductoroper=\Frobeniusoper +1\).
+%
+O conjunto dos \emph{elementos esquerdos} de~\(S\) consiste dos elementos de~\(S\) mais pequenos que~\(\Frobeniusoper\). Denota-se por \(\leftsoper\).
+
+%%%%%%%%%%% Contar semigrupos numéricos %%%%%%%%%%
+\section{Contar semigrupos numéricos}\label{sec:contar}
+Aos invariantes combinatórios (género, número de Frobenius e primitivo máximo) estão associadas partições do conjunto de semigrupos numéricos e, consequentemente, sucessões numéricas  \(\left(n_g\right)\), …
+
+Designamos genericamente o estudo destas sucessões por contagem de semigrupos numéricos, respetivamente por género, número de Frobenius e primitivo máximo.
+Número de Frobenius – questao proposta por Wilf
+Género - muito popular depois de algumas conjeturas propostas por Maria
+Primitivo máximo - introduzida numa tese de doutoramento do CMUP, foi relevante nessa tese
+A contagem por género despertou o interesse de muitos investigadores da área depois de Maria ter apresentado diversas conjunturas
+Aquela com maior capacidade de atrair a atenção diz que a sucessão \(\left(n_g\right)\) tem (assintoticamente) um comportamento semelhante à sucessão de Fibonacci: \(\lim \frac{n_{g-1}+n_{g-2}}{n_g} = 1\)
+Esta conjetura foi resolvida por Zhai, enquanto estudante. Outras conjeturas não tiveram a mesma sorte, o que me leva a pensar que os métodos usados não têm sido os mais adequados.
+
+
+
+%%%%%%%%%%%% the numerical semigroups graph %%%%%%%%%%
+\section{Grafo dos semigrupos numéricos e árvores geradoras}\label{sec:NSgraph}
+
+Podemos construir um grafo de (todos os) semigrupos numéricos como segue: os vértices são os semigrupos numéricos; há uma aresta a ligar dois vértices se um deles puder ser obtido do outro por remoção de um gerador minimal 
+Uma árvore geradora de um grafo é um subgrafo conexo, sem ciclos (diz-se uma árvore) que tem todos os vértices do grafo.
+O subgrafo que se obtém considerando apenas as arestas que ligam semigrupos numéricos em que um se obtém do outro juntando-lhe o número de Frobenius (ou, o que é o mesmo, um se obtém do outro por remoção de um primitivo maior que o número de Frobenius) é uma árvore. É a (única) que aparece na literatura e costuma ser designada por árvore dos semigrupos numéricos. Vou designá-la por árvore clássica. Zhai obteve o resultado já referido recorrendo a uma análise muito detalhada da árvore clássica; vários investigadores têm usado a árvore clássica para obter os primeiros elementos da sucessão \(\left(n_g\right)\). O maior já obtido é \(n_{77} = \num{47008818196495180}\)
+
+
+%%%%%%%%%%%%% Challenge %%%%%%%%%%%
+\section{Desafio}\label{sec:desafio}
+
+O desafio consiste em tentar considerar outras árvores geradoras, tendo em vista o estudo de assuntos relacionados com conjeturas para as quais a árvore clássica parece desadequada.
+
+Referimos ainda a existência de software que ajudará na escolha das pistas a seguir na investigação, descartando outras. O pacote \texttt{numerigalsgps}~\cite{NumericalSgps1.4.0}, escrito na linguagem GAP~\cite{GAP4.14.0} e distribuído com o sistema computacional com o mesmo nome, destina-se a cálculos com semigrupos numéricos. Algoritmos desenvolvidos no decurso da investigação poderão ser implementados em GAP e adicionados ao pacote referido, o qual aceita contribuições.
+
+Problema a ter em mente: a sucessão \(\left(n_g\right)\) é crescente?
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% references %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% uncomment to use biblatex  
+\printbibliography
+%%
+%%uncomment to use bibtex
+% \bibliographystyle{plainurl}
+% %\bibliography{../../../../../bib/NumericalS-bib/numericals.bib,../../../../../bib/NumericalS-bib/preprints.bib,../../../../../bib/NumericalS-bib/software.bib,../../../../../bib/NumericalS-bib/slides.bib}
+%%%%%%%%%
+%\input{references}
+\end{document}
+
