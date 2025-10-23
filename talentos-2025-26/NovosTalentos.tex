@@ -10,6 +10,9 @@
 %\usepackage{stmaryrd}
 
 \setlength{\parskip}{.2em}
+
+\usepackage{indentfirst}
+
 % \input{preamble.tex}
 %%%%%%%%%%%%%%%%%%%%%%%%%% ``commonly used packages`` %%%%%%%%%%%%%%%%%%
 \usepackage{amsfonts,amsmath,amsthm,amssymb}
@@ -106,7 +109,7 @@
 
 
 \title{Contagem de semigrupos numéricos}
-\author{Tema proposto por Manuel Delgado}
+\author{Projeto proposto por Manuel Delgado}
 \date{2025/2026}
 
 \begin{document}
@@ -115,9 +118,14 @@
 
 
 \begin{abstract}
+% - os objetivos do projeto; 
+% - uma breve descrição dos conhecimentos que os bolseiros já deveriam ter ou terão de adquirir antes de iniciar o projecto;
+% - uma menção se o projeto está vocacionado para alunos do 2.º, 3.º ano de licenciatura ou 1.º ano de mestrado.
   
-This note contains problems on numerical semigroups that are pottentialy adequate for undergraduate or young graduate students
-  
+  O objetivo deste projeto é levar o bolseiro a inteirar-se de problemas de contagem de semigrupos numéricos, os quais tem interessado muitos investigadores da área. Das muitas conjeturas que têm surgido há diversas que são ainda problemas em aberto.
+%
+  Da parte do bolseiro é esperada uma certa maturidade matemática. Os problemas a abordar são fáceis de formular e as técnicas que têm permitido avanços são diversas. Interesse por Álgebra Comutativa e Combinatória pode ajudar. 
+ 
 \end{abstract}
 
 
@@ -126,49 +134,67 @@ This note contains problems on numerical semigroups that are pottentialy adequat
 \section{Introdução}\label{sec:introducao}
 
 Um semigrupo numérico \(S\) é um subconjunto de \(\mathbb{N}\) (o conjunto dos inteiros não negativos) tal que \(0 \in S\), \(S\) é estável para a adição e o seu complemento em \(\mathbb{N}\) é finito.
-
-Uma boa introdução aos semigrupos numéricos é um livro de Rosales e García-Sánchez~\cite{RosalesGarcia2009Book-Numerical}. Lá encontramos a generalidade da notação e terminologia usada neste plano.
-
-Ao longo deste plano de trabalhos, \(S\) representa um semigrupo numérico arbitrário. 
-
-Um semigrupo numérico \(S\) tem um único conjunto de geradores que é minimal para a inclusão. Esse conjunto é finito e designamos os seus elementos por \emph{elementos primitivos}. Denotamos o conjunto dos elementos primitivos de~\(S\) por~\(\primitivesoper\). A sua cardinalidade, dita \emph{dimensão de imersão} de~\(S\) denota-se por~\(\lvert \primitivesoper\rvert\).
-
-A \emph{multiplicidade} de~\(S\) é o mais pequeno inteiro positivo de~\(S\) e denota-se por~\(\multiplicityoper\).
-O \emph{número de Frobenius} de~\(S\) é o maior inteiro que não pertence a~\(S\) e denota-se por~\(\Frobeniusoper\).
-O \emph{condutor} de~\(S\) é \(\conductoroper=\Frobeniusoper +1\).
 %
-O conjunto dos \emph{elementos esquerdos} de~\(S\) consiste dos elementos de~\(S\) mais pequenos que~\(\Frobeniusoper\). Denota-se por \(\leftsoper\).
+Rosales e García-Sánchez escreveram um livro~\cite{RosalesGarcia2009Book-Numerical} que constitui uma boa introdução aos semigrupos numéricos. 
+
+Ao longo desta pequena descrição do projeto, \(S\) representa um semigrupo numérico arbitrário. Seguem-se algumas definições.
+
+A \emph{multiplicidade} de~\(S\) é o mais pequeno inteiro positivo de~\(S\) e denota-se por~\(\multiplicityoper(S)\).
+O \emph{número de Frobenius} de~\(S\) é o maior inteiro que não pertence a~\(S\) e denota-se por~\(\Frobeniusoper(S)\).
+A cardinalidade de \(\mathbb{N}\setminus S\) diz-se o \emph{género} de \(S\) e denota-se por \(\genusoper(S)\).
+
+Seja \(A\) um conjunto de inteiros positivos. Denota-se por \(\langle A \rangle\) o conjunto das combinações lineares de elementos de \(A\), com coeficientes em \(\mathbb{N}\). Diz-se que \(A\) \emph{gera} \(S\) se \(\langle A \rangle = S\).
+
+%Diz-se que um conjunto \(A\) de inteiros positivos \emph{gera} \(S\) se todo o elemento de \(S\) puder ser escrito como combinação linear de elementos de \(A\) com coeficientes em \(\mathbb{N}\).
+%\(S=\left\{\sum_{a\in A}n_aa\suchthat n_a\in \mathbb{N}\right\}\).
+
+É fácil ver que \(S\) tem um conjunto de geradores com não mais de \(\multiplicityoper(S)\) elementos (um por classe de congruência módulo \(\multiplicityoper(S)\)), portanto finito. Além disso, um semigrupo numérico tem um único conjunto de geradores que é minimal para a inclusão. Os seus elementos são designados por \emph{geradores minimais} ou \emph{elementos primitivos}. O maior deles designa-se por \emph{primitivo máximo}.
+
+Os elementos de um semigrupo numérico dizem-se \emph{esquerdos} ou \emph{direitos}, respetivamente, conforme estão à esquerda ou à direita do número de Frobenius, isto é, se são mais pequenos ou se são maiores que o número de Frobenius, respetivamente. Para os elemento primitivos usa-se uma terminologia análoga.
+
 
 %%%%%%%%%%% Contar semigrupos numéricos %%%%%%%%%%
 \section{Contar semigrupos numéricos}\label{sec:contar}
-Aos invariantes combinatórios (género, número de Frobenius e primitivo máximo) estão associadas partições do conjunto de semigrupos numéricos e, consequentemente, sucessões numéricas  \(\left(n_g\right)\), …
+Denotamos por \(\mathbb{S}\) o conjunto de todos os semigrupos numéricos.
+Aos invariantes combinatórios ``género'', ``número de Frobenius'' e ``primitivo máximo'', estão associadas partições de \(\mathbb{S}\).
+Por exemplo, sendo \(\mathcal{G}_n\) %=\left\{S\in \mathbb{S}\suchthat \genusoper(S)=n\right\}\)
+o conjunto dos semigrupos numéricos de género \(n\), com \(n\) um inteiro não negativo, tem-se que \(\left\{\mathcal{G}_n\suchthat n\in \mathbb{N}\right\}\) é uma partição de \(\mathbb{S}\). Denotando por \(n_g\) a cardinalidade de \(\mathcal{G}_g\), %(isto é, fazendo \(\left(n_g=\left|\mathcal{G}_g\right|\right)\)), 
+associamos a \(\mathbb{S}\) a sucessão numérica \(\left(n_g\right)_{g\in\mathbb{N}}\). Algo inteiramente análogo pode ser feito quando se consideram os invariantes ``número de Frobenius'' ou ``primitivo máximo''.  
 
-Designamos genericamente o estudo destas sucessões por contagem de semigrupos numéricos, respetivamente por género, número de Frobenius e primitivo máximo.
-Número de Frobenius – questao proposta por Wilf
-Género - muito popular depois de algumas conjeturas propostas por Maria
-Primitivo máximo - introduzida numa tese de doutoramento do CMUP, foi relevante nessa tese
-A contagem por género despertou o interesse de muitos investigadores da área depois de Maria ter apresentado diversas conjunturas
-Aquela com maior capacidade de atrair a atenção diz que a sucessão \(\left(n_g\right)\) tem (assintoticamente) um comportamento semelhante à sucessão de Fibonacci: \(\lim \frac{n_{g-1}+n_{g-2}}{n_g} = 1\)
-Esta conjetura foi resolvida por Zhai, enquanto estudante. Outras conjeturas não tiveram a mesma sorte, o que me leva a pensar que os métodos usados não têm sido os mais adequados.
+
+Designamos genericamente o estudo destas sucessões numéricas por \emph{contagem de semigrupos numéricos}, respetivamente por \emph{género}, por \emph{número de Frobenius} e por \emph{primitivo máximo}.
+A contagem por \emph{número de Frobenius} aparece numa questão de um artigo de Herbert Wilf~\cite{Wilf1978AMM-circle}. Uma outra questão do mesmo artigo, conhecido por ``conjetura de Wilf'', é hoje ainda um problema completamente em aberto apesar dos inúmeros artigos a que já deu origem (ver~\cite{Delgado2020-survey}).  
+A contagem por \emph{primitivo máximo} foi introduzida por Neeraj Kumar~\cite{Kumar2025phd-Numerical} na sua tese de doutoramento, recentemente realizada no CMUP.
+
+A contagem por \emph{género} tornou-se muito popular depois de diversas conjeturas propostas por Maria Brás-Amorós~\cite{Bras-Amoros2008SF-Fibonacci}, algumas das quais são ainda problemas em aberto.
+Aquela com maior capacidade de atrair a atenção diz que a sucessão \(\left(n_g\right)\) tem (assintoticamente) um comportamento semelhante à sucessão de Fibonacci: \(\lim_{g\to \infty} \frac{n_{g-1}+n_{g-2}}{n_g} = 1\).
+Esta conjetura foi resolvida por Zhai~\cite{Zhai2013SF-Fibonacci}, enquanto estudante. 
+%Outras conjeturas não tiveram a mesma sorte, o que me leva a pensar que os métodos usados não têm sido os mais adequados.
 
 
 
 %%%%%%%%%%%% the numerical semigroups graph %%%%%%%%%%
 \section{Grafo dos semigrupos numéricos e árvores geradoras}\label{sec:NSgraph}
 
-Podemos construir um grafo de (todos os) semigrupos numéricos como segue: os vértices são os semigrupos numéricos; há uma aresta a ligar dois vértices se um deles puder ser obtido do outro por remoção de um gerador minimal 
-Uma árvore geradora de um grafo é um subgrafo conexo, sem ciclos (diz-se uma árvore) que tem todos os vértices do grafo.
-O subgrafo que se obtém considerando apenas as arestas que ligam semigrupos numéricos em que um se obtém do outro juntando-lhe o número de Frobenius (ou, o que é o mesmo, um se obtém do outro por remoção de um primitivo maior que o número de Frobenius) é uma árvore. É a (única) que aparece na literatura e costuma ser designada por árvore dos semigrupos numéricos. Vou designá-la por árvore clássica. Zhai obteve o resultado já referido recorrendo a uma análise muito detalhada da árvore clássica; vários investigadores têm usado a árvore clássica para obter os primeiros elementos da sucessão \(\left(n_g\right)\). O maior já obtido é \(n_{77} = \num{47008818196495180}\)
+Podemos construir um grafo de (todos os) semigrupos numéricos como segue: \(\mathbb{S}\) é o conjunto dos vértices; dois vértices estão ligados por uma aresta se um deles puder ser obtido do outro por remoção de um gerador minimal.
 
+Uma árvore geradora de um grafo é um subgrafo conexo, sem ciclos que tem todos os vértices do grafo.
+
+O subgrafo do grafo dos semigrupos numéricos que se obtém considerando apenas as arestas que ligam semigrupos numéricos em que um se obtém do outro juntando-lhe o número de Frobenius (ou, o que é o mesmo, um se obtém do outro por remoção de um primitivo direito) é uma árvore. É a (única) que aparece na literatura e costuma ser designada por árvore dos semigrupos numéricos. Vou designa-la por árvore clássica. Zhai obteve o resultado já referido recorrendo a uma análise muito detalhada da árvore clássica; vários investigadores têm usado a árvore clássica para obter os primeiros elementos da sucessão \(\left(n_g\right)\). O maior já obtido é \(n_{77} = \num{47008818196495180}\) (ver~\cite{oeis_ns_counting_genus}).
+
+Um olhar sobre os primeiros elementos da sucessão \(\left(n_g\right)\)\footnote{a lista dos números conhecidos está disponível em \url{https://oeis.org/A007323/b007323.txt}} e o facto desta ter um comportamento assintótico semelhante ao da sucessão de Fibonacci leva a  pensar tratar-se de uma sucessão crescente, como Brás-Amorós conjeturou. No entanto, este é ainda um problema em aberto.
+%https://oeis.org/A007323/b007323.txt
 
 %%%%%%%%%%%%% Challenge %%%%%%%%%%%
 \section{Desafio}\label{sec:desafio}
 
-O desafio consiste em tentar considerar outras árvores geradoras, tendo em vista o estudo de assuntos relacionados com conjeturas para as quais a árvore clássica parece desadequada.
 
-Referimos ainda a existência de software que ajudará na escolha das pistas a seguir na investigação, descartando outras. O pacote \texttt{numerigalsgps}~\cite{NumericalSgps1.4.0}, escrito na linguagem GAP~\cite{GAP4.14.0} e distribuído com o sistema computacional com o mesmo nome, destina-se a cálculos com semigrupos numéricos. Algoritmos desenvolvidos no decurso da investigação poderão ser implementados em GAP e adicionados ao pacote referido, o qual aceita contribuições.
+O desafio do projeto proposto consiste em tentar considerar árvores geradoras que não a clássica, tendo em vista o estudo de assuntos relacionados com conjeturas para as quais a árvore clássica parece desadequada. O problema de provar que a sucessão \(\left(n_g\right)\) é crescente pode bem ser um deles.
 
-Problema a ter em mente: a sucessão \(\left(n_g\right)\) é crescente?
+%%%%%%%%%%%%% software %%%%%%%%%%%
+\section{Software}\label{sec:software}
+Gostaria de referir a existência de \emph{software} destinado a fazer cálculos com semigrupos numéricos. Trata-se do pacote \texttt{numerigalsgps}~\cite{NumericalSgps1.4.0}, escrito na linguagem GAP~\cite{GAP4.15.1} e distribuído com o sistema computacional com o mesmo nome. Ele permitirá testar muitos exemplos que ajudarão a ver se se está a ir na direção certa ou mesmo a encontrar novas pistas.
+Observo ainda que, dependendo do interesse bo bolseiro, algoritmos desenvolvidos no decurso da investigação poderão ser implementados em GAP e adicionados ao pacote referido, o qual aceita contribuições.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% references %%%%%%%%%%%%%%%%%%%%%%%%%%%%
