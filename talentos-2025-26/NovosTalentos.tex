@@ -122,9 +122,9 @@
 % - uma breve descrição dos conhecimentos que os bolseiros já deveriam ter ou terão de adquirir antes de iniciar o projecto;
 % - uma menção se o projeto está vocacionado para alunos do 2.º, 3.º ano de licenciatura ou 1.º ano de mestrado.
   
-  O objetivo deste projeto é levar o bolseiro a inteirar-se de problemas de contagem de semigrupos numéricos, os quais tem interessado muitos investigadores da área. Das muitas conjeturas que têm surgido há diversas que são ainda problemas em aberto.
+  O objetivo deste projeto é levar o bolseiro a inteirar-se de problemas de contagem de semigrupos numéricos, os quais têm interessado muitos investigadores da área. Das muitas conjeturas que têm surgido há diversas que são ainda problemas em aberto.
 %
-  Da parte do bolseiro é esperada uma certa maturidade matemática. Os problemas a abordar são fáceis de formular e as técnicas que têm permitido avanços são diversas. Interesse por Álgebra Comutativa e Combinatória pode ajudar. 
+  Da parte do bolseiro, é esperada uma certa maturidade matemática. Os problemas a abordar são fáceis de formular e as técnicas que têm permitido avanços são diversas. Interesse por Álgebra Comutativa e Combinatória pode ajudar. 
  
 \end{abstract}
 
@@ -148,9 +148,9 @@ Seja \(A\) um conjunto de inteiros positivos. Denota-se por \(\langle A \rangle\
 %Diz-se que um conjunto \(A\) de inteiros positivos \emph{gera} \(S\) se todo o elemento de \(S\) puder ser escrito como combinação linear de elementos de \(A\) com coeficientes em \(\mathbb{N}\).
 %\(S=\left\{\sum_{a\in A}n_aa\suchthat n_a\in \mathbb{N}\right\}\).
 
-É fácil ver que \(S\) tem um conjunto de geradores com não mais de \(\multiplicityoper(S)\) elementos (um por classe de congruência módulo \(\multiplicityoper(S)\)), portanto finito. Além disso, um semigrupo numérico tem um único conjunto de geradores que é minimal para a inclusão. Os seus elementos são designados por \emph{geradores minimais} ou \emph{elementos primitivos}. O maior deles designa-se por \emph{primitivo máximo}.
+É fácil ver que \(S\) tem um conjunto de geradores com não mais de \(\multiplicityoper(S)\) elementos (um por classe de congruência módulo \(\multiplicityoper(S)\)), portanto, finito. Além disso, um semigrupo numérico tem um único conjunto de geradores que é minimal para a inclusão. Os seus elementos são designados por \emph{geradores minimais} ou \emph{elementos primitivos}. O maior deles designa-se por \emph{primitivo máximo}.
 
-Os elementos de um semigrupo numérico dizem-se \emph{esquerdos} ou \emph{direitos}, respetivamente, conforme estão à esquerda ou à direita do número de Frobenius, isto é, se são mais pequenos ou se são maiores que o número de Frobenius, respetivamente. Para os elemento primitivos usa-se uma terminologia análoga.
+Os elementos de um semigrupo numérico dizem-se \emph{esquerdos} ou \emph{direitos}, respetivamente, conforme estão à esquerda ou à direita do número de Frobenius, isto é, se são mais pequenos ou se são maiores que o número de Frobenius, respetivamente. Para os elementos primitivos usa-se uma terminologia análoga.
 
 
 %%%%%%%%%%% Contar semigrupos numéricos %%%%%%%%%%
@@ -163,7 +163,7 @@ associamos a \(\mathbb{S}\) a sucessão numérica \(\left(n_g\right)_{g\in\mathb
 
 
 Designamos genericamente o estudo destas sucessões numéricas por \emph{contagem de semigrupos numéricos}, respetivamente por \emph{género}, por \emph{número de Frobenius} e por \emph{primitivo máximo}.
-A contagem por \emph{número de Frobenius} aparece numa questão de um artigo de Herbert Wilf~\cite{Wilf1978AMM-circle}. Uma outra questão do mesmo artigo, conhecido por ``conjetura de Wilf'', é hoje ainda um problema completamente em aberto apesar dos inúmeros artigos a que já deu origem (ver~\cite{Delgado2020-survey}).  
+A contagem por \emph{número de Frobenius} aparece numa questão de um artigo de Herbert Wilf~\cite{Wilf1978AMM-circle}. Uma outra questão do mesmo artigo, conhecida por ``conjetura de Wilf'', é hoje ainda um problema completamente em aberto apesar dos inúmeros artigos a que já deu origem (ver~\cite{Delgado2020-survey}).  
 A contagem por \emph{primitivo máximo} foi introduzida por Neeraj Kumar~\cite{Kumar2025phd-Numerical} na sua tese de doutoramento, recentemente realizada no CMUP.
 
 A contagem por \emph{género} tornou-se muito popular depois de diversas conjeturas propostas por Maria Brás-Amorós~\cite{Bras-Amoros2008SF-Fibonacci}, algumas das quais são ainda problemas em aberto.
@@ -178,11 +178,11 @@ Esta conjetura foi resolvida por Zhai~\cite{Zhai2013SF-Fibonacci}, enquanto estu
 
 Podemos construir um grafo de (todos os) semigrupos numéricos como segue: \(\mathbb{S}\) é o conjunto dos vértices; dois vértices estão ligados por uma aresta se um deles puder ser obtido do outro por remoção de um gerador minimal.
 
-Uma árvore geradora de um grafo é um subgrafo conexo, sem ciclos que tem todos os vértices do grafo.
+Uma árvore geradora de um grafo é um subgrafo conexo, sem ciclos, que tem todos os vértices do grafo.
 
-O subgrafo do grafo dos semigrupos numéricos que se obtém considerando apenas as arestas que ligam semigrupos numéricos em que um se obtém do outro juntando-lhe o número de Frobenius (ou, o que é o mesmo, um se obtém do outro por remoção de um primitivo direito) é uma árvore. É a (única) que aparece na literatura e costuma ser designada por árvore dos semigrupos numéricos. Vou designa-la por árvore clássica. Zhai obteve o resultado já referido recorrendo a uma análise muito detalhada da árvore clássica; vários investigadores têm usado a árvore clássica para obter os primeiros elementos da sucessão \(\left(n_g\right)\). O maior já obtido é \(n_{77} = \num{47008818196495180}\) (ver~\cite{oeis_ns_counting_genus}).
+O subgrafo do grafo dos semigrupos numéricos que se obtém considerando apenas as arestas que ligam semigrupos numéricos em que um se obtém do outro juntando-lhe o número de Frobenius (ou, o que é o mesmo, um se obtém do outro por remoção de um primitivo direito) é uma árvore. É a (única) que aparece na literatura e costuma ser designada por árvore dos semigrupos numéricos. Vou designá-la por árvore clássica. Zhai obteve o resultado já referido recorrendo a uma análise muito detalhada da árvore clássica; vários investigadores têm usado a árvore clássica para obter os primeiros elementos da sucessão \(\left(n_g\right)\). O maior já obtido é \(n_{77} = \num{47008818196495180}\) (ver~\cite{oeis_ns_counting_genus}).
 
-Um olhar sobre os primeiros elementos da sucessão \(\left(n_g\right)\)\footnote{a lista dos números conhecidos está disponível em \url{https://oeis.org/A007323/b007323.txt}} e o facto desta ter um comportamento assintótico semelhante ao da sucessão de Fibonacci leva a  pensar tratar-se de uma sucessão crescente, como Brás-Amorós conjeturou. No entanto, este é ainda um problema em aberto.
+Um olhar sobre os primeiros elementos da sucessão \(\left(n_g\right)\)\footnote{a lista dos números conhecidos está disponível em \url{https://oeis.org/A007323/b007323.txt}} e o facto desta ter um comportamento assintótico semelhante ao da sucessão de Fibonacci levam a  pensar tratar-se de uma sucessão crescente, como Brás-Amorós conjeturou. No entanto, este é ainda um problema em aberto.
 %https://oeis.org/A007323/b007323.txt
 
 %%%%%%%%%%%%% Challenge %%%%%%%%%%%
